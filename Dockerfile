@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y sudo less mysql-client
 
 # Add & configure PHP
 RUN docker-php-ext-install exif
-ADD uploads.ini /usr/local/etc/php
+ADD uploads.ini /usr/local/etc/php/conf.d
 
 # Add wordpress cli
 RUN curl -o /bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
