@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y sudo less mysql-client
 
 # Add & configure PHP
 RUN docker-php-ext-install exif
-RUN apt-get install -y libmagickwand-dev imagemagick --fix-missing
+RUN apt-get install -y libm17n-dev libmagickwand-dev imagemagick --no-install-recommends
 RUN pecl install imagick && docker-php-ext-enable imagick
 ADD uploads.ini /usr/local/etc/php/conf.d/
 
