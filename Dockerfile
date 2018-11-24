@@ -5,7 +5,9 @@ RUN apt-get update && apt-get install -y sudo less mysql-client
 
 # Add & configure PHP
 RUN docker-php-ext-install exif
-ADD uploads.ini /usr/local/etc/php/conf.d
+RUN apt-get install -y libmagicwand-dev
+RUN pecl install imagick && docker-php-ext-enable imagick
+ADD uploads.ini /usr/local/etc/php/conf.d/
 
 # Add wordpress cli
 RUN curl -o /bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
