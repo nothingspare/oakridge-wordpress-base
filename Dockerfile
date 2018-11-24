@@ -1,13 +1,16 @@
 FROM wordpress:4.9.8-php7.2-apache
 
 # Add system packages
-RUN apt-get update && apt-get install -y sudo less mysql-client
+RUN apt-get update && apt-get install -y sudo less mysql-client imagemagick
 
 # Add & configure PHP
 RUN docker-php-ext-install exif
-RUN apt-get install -y libm17n-dev libmagickwand-dev imagemagick --no-install-recommends
-RUN pecl install imagick && docker-php-ext-enable imagick
 ADD uploads.ini /usr/local/etc/php/conf.d/
+
+RUN apt-get update && apt-get install -y \
+        libmagickwand-dev --no-install-recommends
+
+RUN pecl install imagick && docker-php-ext-enable imagick
 
 # Add wordpress cli
 RUN curl -o /bin/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
